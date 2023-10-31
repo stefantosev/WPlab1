@@ -1,0 +1,52 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Movie Ticket Order page - Welcome and choose a Movie</title>
+    <style type="text/css">
+        body {
+            width: 800px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Welcome to our Movie Ticket Shop App</h1>
+</header>
+<main>
+    <h2>Choose movie:</h2>
+    <!-- Display radio buttons for each movie,
+            the value should be the movie title
+            and the displayed text should be Title: <movie_title>, Summary:<movie_summary>, Rating: <movie_rating> -->
+
+    <form th:method="POST" th:action="@{/ticketOrder}">
+        <div th:each="movie : ${Movies}">
+                <input type="radio" th:name="movie" th:value="${movie.getTitle()}" required>
+                <label th:text="'Title:' +  ${movie.getTitle()} + ' Summary:' + ${movie.getSummary} + ' Rating:' +${movie.getRating}">
+        </div>
+        <h2>Choose number of tickets:</h2>
+        <input type="number" name="numTickets" min="1" max="10" required><br/>
+        <br/>
+        <input type="submit" value="Submit">   <!-- mora da e vo form-->
+    </form>
+
+    <form th:method="GET" th:action="@{/}">
+        <h2> Search movies: </h2>
+        <label>Insert title:</label><input type="text" th:name="searchedMovie" required>  <br/>
+        <br/><label>Insert rating:</label><input type="number" min="1" max="10" th:name="searchedRating" required> <br/>
+        <br/> <input type="submit" value="Search">
+        <br/>
+    </form>
+
+    <div>
+        <!--da gi lista site filmovi koi go soddrzat teksot i ratingot ispraten od user -->
+        <ul th:each="searched : ${movies}">
+            <li th:text="${searched.getTitle()} + ' ' + ${searched.getRating()}"></li>
+        </ul>
+    </div>
+
+
+</main>
+</body>
+</html>
