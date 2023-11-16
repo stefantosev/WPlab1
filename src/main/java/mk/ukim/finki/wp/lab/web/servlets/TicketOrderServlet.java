@@ -1,4 +1,4 @@
-package mk.ukim.finki.wp.lab.web;
+package mk.ukim.finki.wp.lab.web.servlets;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -16,7 +16,7 @@ import org.thymeleaf.web.servlet.JakartaServletWebApplication;
 
 import java.io.IOException;
 
-@WebServlet(urlPatterns = "/ticketOrder")
+@WebServlet(urlPatterns = "/servlet/ticketOrder")
 public class TicketOrderServlet extends HttpServlet {
 
     private final MovieServiceImpl inMemoryService;

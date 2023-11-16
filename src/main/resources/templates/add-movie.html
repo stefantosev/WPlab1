@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add-Movie</title>
+</head>
+<body>
+<div>
+    <form th:method="POST" th:action="@{/movies/add}" >
+        <input id="id" type="hidden" name="id"
+               th:value="(${movies} != null ? ${movies.getId()} : '0')">
+        <label for="title">Movie name</label>
+        <input type="text" id="title" name="title"
+               th:value="(${Movies} !=null ? ${Movies.getTitle} : '')"
+               required placeholder="Enter product name">
+
+        <label for="summary">Summary</label>
+        <input type="text" id="summary" name="summary"
+               th:value="(${Movies} !=null ? ${Movies.getSummary()} : '')"
+               required placeholder="Enter product summary">
+
+        <label for="rating">Rating</label>
+        <input type="text" id="rating" name="rating"
+               th:value="(${Movies} !=null ? ${Movies.getRating()} : '')"
+               required placeholder="Enter product rating">
+
+        <div>
+            <label for="productions">Production</label>
+
+            <select name="productions" id="productions">
+                <option th:if="${movies} != null"
+                        th:selected="${movies.getProduction() != null && movies.getProduction().getId() == prod.getId()}"
+                        th:each="prod : ${productions}"
+                        th:value="${prod.getId()}"
+                        th:text="${prod.getName()}">
+                </option>
+
+                <option th:if="${movies} == null"
+                        th:each="prod : ${productions}"
+                        th:value="${prod.getId()}"
+                        th:text="${prod.getName()}">
+                </option>
+            </select>
+
+        </div>
+
+        <input type="submit" value="Save Movie">
+        <a type="button" href="/movies">Back</a>
+    </form>
+</div>
+</body>
+</html>

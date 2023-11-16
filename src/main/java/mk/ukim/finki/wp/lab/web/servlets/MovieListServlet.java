@@ -1,4 +1,4 @@
-package mk.ukim.finki.wp.lab.web;
+package mk.ukim.finki.wp.lab.web.servlets;
 
 
 import jakarta.servlet.RequestDispatcher;
@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@WebServlet (urlPatterns = "")
+@WebServlet (urlPatterns = "/servlet/movies")
 public class MovieListServlet  extends HttpServlet {
 
     private final MovieServiceImpl inMemoryService;

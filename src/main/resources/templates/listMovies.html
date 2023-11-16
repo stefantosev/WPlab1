@@ -22,16 +22,22 @@
 
     <form th:method="POST" th:action="@{/ticketOrder}">
         <div th:each="movie : ${Movies}">
-                <input type="radio" th:name="movie" th:value="${movie.getTitle()}" required>
-                <label th:text="'Title:' +  ${movie.getTitle()} + ' Summary:' + ${movie.getSummary} + ' Rating:' +${movie.getRating}">
+            <label>
+                <input type="radio" th:name="movie" th:value="${movie.getTitle()}" required/>
+            </label>
+            <label th:text="'Title:' +  ${movie.getTitle()} + ' Summary:' + ${movie.getSummary} + ' Rating:' +${movie.getRating}  + ' Production:' +${movie.getProduction}"></label>
+
+            <a th:href=" @{/movies/delete/{id} (id=${movie.getId()})}">DELETE</a>
+            <a th:href="@{/movies/edit-form/{id} (id=${movie.getId()})}">EDIT</a>
         </div>
+
         <h2>Choose number of tickets:</h2>
         <input type="number" name="numTickets" min="1" max="10" required><br/>
         <br/>
         <input type="submit" value="Submit">   <!-- mora da e vo form-->
     </form>
 
-    <form th:method="GET" th:action="@{/}">
+    <form th:method="GET" th:action="@{/movies}">
         <h2> Search movies: </h2>
         <label>Insert title:</label><input type="text" th:name="searchedMovie" required>  <br/>
         <br/><label>Insert rating:</label><input type="number" min="1" max="10" th:name="searchedRating" required> <br/>
@@ -39,11 +45,19 @@
         <br/>
     </form>
 
+
     <div>
         <!--da gi lista site filmovi koi go soddrzat teksot i ratingot ispraten od user -->
         <ul th:each="searched : ${movies}">
             <li th:text="${searched.getTitle()} + ' ' + ${searched.getRating()}"></li>
         </ul>
+    </div>
+
+
+    <div>
+        <form th:method="GET" th:action="@{/movies/add-form}">
+            <input type="submit" value="Add Movie">
+        </form>
     </div>
 
 
